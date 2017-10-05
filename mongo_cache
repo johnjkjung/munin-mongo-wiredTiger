@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+
+## GENERATED FILE - DO NOT EDIT
+
+import urllib2
+import sys
+import os
+import pymongo
+
+def getServerStatus():
+    if 'MONGO_DB_URI' in os.environ:
+      c = pymongo.MongoClient(os.environ['MONGO_DB_URI'])
+    else:
+      c = pymongo.MongoClient()
+
+    return c.admin.command('serverStatus', workingSet=True)
+
+def doData():
+    ss = getServerStatus()["wiredTiger"]["cache"]
+    print "current.value " + str(ss["bytes currently in the cache"])
+    print "maximum.value " + str(ss["maximum bytes configured"])
+    print "dirty.value "   + str(ss["tracked dirty bytes in the cache"])
+    
+def doConfig():
+    print "graph_title MongoDB cache"
+    print "graph_args --base 1024 -l 0 --vertical-label Bytes"
+    print "graph_category MongoDB"
+
+    print "current.label current"
+    print "maximum.label maximum"
+    print "dirty.label dirty"
+
+
+if __name__ == "__main__":
+
+    from os import environ
+    if 'HOST' in environ:
+        host = environ['HOST']
+    if 'PORT' in environ:
+        port = environ['PORT']
+    if 'USER' in environ:
+        user = environ['USER']
+    if 'PASSWORD' in environ:
+        password = environ['PASSWORD']
+
+if len(sys.argv) > 1 and sys.argv[1] == "config":
+    doConfig()
+else:
+    doData()
