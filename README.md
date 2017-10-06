@@ -1,10 +1,9 @@
 # munin-mongo-wiredTiger
-based on comerford/mongo-munin (edit for wiredTiger)
+based on [comerford/mongo-munin](https://github.com/comerford/mongo-munin)
 
 
 'comerford/mongo-munin' plugins works fine in mmapv1 engine, 
-but "mongo_lock/mongo_btree" of them are broken in wiredTiger. So, I made some change and add additional plugins based on datadog advice.
-(ref: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-wiredtiger/)
+but "mongo_lock/mongo_btree" of them are broken in wiredTiger. So, I made some change and add additional plugins based on [datadog advice](https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-wiredtiger/).
 
 
 comerford/mongo-munin Plugins
